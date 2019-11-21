@@ -1,21 +1,24 @@
 package model;
 
-public class Score  {
+import java.io.Serializable;
 
-	
-	private double puntaje;
+public class Score implements Serializable {
+	private int puntaje;
 	private String nombre;
-	public Score(double puntaje, String nombre) {
+	private int nivel;
+	
+	public Score(int puntaje, String nombre,int nivel) {
 		super();
 		this.puntaje = puntaje;
 		this.nombre = nombre;
-	 
+		this.setNivel(nivel);
 	}
 
-	public double getPuntaje() {
+	public int getPuntaje() {
 		return puntaje;
 	}
-	public void setPuntaje(double puntaje) {
+	
+	public void setPuntaje(int puntaje) {
 		this.puntaje = puntaje;
 	}
 	public String getNombre() {
@@ -24,4 +27,24 @@ public class Score  {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
+	public int getNivel() {
+		return nivel;
+	}
+	public void setNivel(int nivel) {
+		this.nivel = nivel;
+	}
+
+
+	public String toString() {
+		String msj = "";
+		
+		msj += "El puntaje es:" + puntaje + " " + "\n";
+		msj += "El nombre es:" + nombre + " " + "\n";
+		msj += "El nivel es:" + nivel + " " + "\n";
+		
+		return msj;
+		
+	}
+
 }

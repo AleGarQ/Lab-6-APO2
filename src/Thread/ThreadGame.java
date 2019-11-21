@@ -1,5 +1,6 @@
 package Thread;
 import Controller.MainController;
+import javafx.application.Platform;
 import model.*;
 
 public class ThreadGame extends Thread {
@@ -28,7 +29,13 @@ public class ThreadGame extends Thread {
 		while(balls.isStop() == false) {
 			try {
 				moveBall();
+				if(m.getJuego().getNivel() == 1) {
 				Thread.sleep(balls.getEspera());
+				}else if(m.getJuego().getNivel() == 2) {
+				Thread.sleep(balls.getEspera() -3);	
+				}else if(m.getJuego().getNivel() == 3) {
+				Thread.sleep(balls.getEspera() - 6);	
+				}
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

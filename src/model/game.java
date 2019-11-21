@@ -66,36 +66,22 @@ public class game implements Serializable{
 		
 	}  
 	
-	public Double calculateScore() {
-		Double m = 0.0;
-		
-		if(countRebotes() < 10) {
-			if(nivel == 1) {
-			m = (double) countRebotes() * 10 + (Math.random() + 1 * 100);
-		    }else if(nivel == 2) {
-		    m = (double) countRebotes() * 100 + (Math.random() + 1 * 1000);
-		    }else if(nivel == 3) {
-		    m = (double) countRebotes() * 1000 + (Math.random() + 1 * 10000);
-		    }
-		}else if(countRebotes() > 20) {
-			if(nivel == 1) {
-			m = (double) countRebotes() * 1 + (Math.random() + 1 * 100);
-		    }else if(nivel == 2) {
-		    m = (double) countRebotes() * 10 + (Math.random() + 1 * 1000);
-		    }else if(nivel == 3) {
-		    m = (double) countRebotes() * 100 + (Math.random() + 1 * 10000);
-		    }	
-		}
-		return m;
-	}
 	
 	public void addScore(String score) throws puntajeVacio {
 		
 		if(score.isEmpty()) {
 			throw new puntajeVacio("");
 		}else {
-				Score m = new Score(calculateScore(),score);
+				if(puntajes.isEmpty()) {
+				Score m = new Score(countRebotes(),score,getNivel());
 				puntajes.add(m);
+				}else {
+					
+					ordenarPuntajes();
+					ordenarNivel();
+					Score m = new Score(countRebotes(),score,getNivel());
+					puntajes.add(0,m);
+				} 
 		}
 		
 	}
@@ -124,8 +110,10 @@ public class game implements Serializable{
 			}
 			br.close();
 		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 	}
@@ -148,9 +136,8 @@ public class game implements Serializable{
 	}
 	
 	public void deserializableGame() {
-		File fl = new File("files/Juego.restrepo");
+		File fl = new File("files/Juego.dat");
 		ArrayList<Score> score1;
-		if(!puntajes.isEmpty()) {
 		try {
 			FileInputStream fls = new FileInputStream(fl);
 			ObjectInputStream ois = new ObjectInputStream(fls);
@@ -162,7 +149,7 @@ public class game implements Serializable{
 		}catch(ClassNotFoundException e) {
 			e.getCause();
 		}
-		}
+		
 	}
 	
 	public Boolean countStopBalls() {
@@ -189,19 +176,11 @@ public class game implements Serializable{
 		return m;
 	}
 	
-
-	public void compareAllScoreInGame() {
-		
-		
-		
-	}
-	
-
 	public void ordenarPuntajes() {
 		
 		for(int i = 0; i < puntajes.size();i++) {
 			for(int j = 0; j < puntajes.size()-1-i;j++) {
-				if(puntajes.get(j).getPuntaje() > (puntajes.get(j+1).getPuntaje())) {
+				if(puntajes.get(j).getPuntaje() > (puntajes.get(j+1).getPuntaje()) && puntajes.get(j).getNivel() >= puntajes.get(j+1).getNivel()) {
 					Score own = puntajes.get(j);
 					puntajes.set(j,puntajes.get(j+1));
 					puntajes.set(j+1, own);		
@@ -210,5 +189,18 @@ public class game implements Serializable{
 		}	
 	}
 	
+
+	public void ordenarNivel() {
+		
+		for(int i = 0; i < puntajes.size();i++) {
+			for(int j = 0; j < puntajes.size()-1-i;j++) {
+				if(puntajes.get(j).getNivel() >= puntajes.get(j+1).getNivel()) {
+					Score own = puntajes.get(j);
+					puntajes.set(j,puntajes.get(j+1));
+					puntajes.set(j+1, own);		
+				}
+			}
+		}
+	}
 
 }
