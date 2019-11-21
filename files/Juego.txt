@@ -1,0 +1,8 @@
+
+1
+
+50,70,90,10,Izquierda,0,false
+70,120,120,12,Derecha,0,false
+80,350,230,14,Arriba,0,false
+60,280,10,16,Abajo,0,false
+30,360,14,26,Abajo,0,false

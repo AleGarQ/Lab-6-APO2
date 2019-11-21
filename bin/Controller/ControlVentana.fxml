@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+  <children>
+    <MenuBar VBox.vgrow="NEVER">
+      <menus>
+        <Menu mnemonicParsing="false" text="Juego">
+               <items>
+                  <MenuItem fx:id="m" mnemonicParsing="false" onAction="#loadGame" text="Cargar Juego" />
+                  <MenuItem fx:id="m1" mnemonicParsing="false" onAction="#salir" text="Salir" />
+               </items>
+        </Menu>
+        <Menu mnemonicParsing="false" text="Ver">
+          <items>
+            <MenuItem fx:id="m2" mnemonicParsing="false" onAction="#irPuntaje" text="Mejores Puntajes" />
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+      <BorderPane fx:id="pane" prefHeight="376.0" prefWidth="640.0">
+         <center>
+            <Pane fx:id="pane1" prefHeight="377.0" prefWidth="640.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+  </children>
+</VBox>
